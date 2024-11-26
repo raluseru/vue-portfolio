@@ -73,8 +73,8 @@ function  onLeave(el, done) {
     <ul class="portfolio-list">
         <transition-group :css="false" @enter="onEnter" @leave="onLeave">
             <li v-for="(work,i) in workArray" :key="i" :data-index="workArray.length - 1">
-                <a :href="work.link">
-                    <img :src="work.img.src" class="work-image" :alt="work.img.alt">
+                <a :href="work.link" >
+                    <img :src="work.img.src" class="work-image" :alt="work.img.alt" :class="{'vertical-align': work.id==='ortodoxia'}">
                 </a>
             </li>
         </transition-group>

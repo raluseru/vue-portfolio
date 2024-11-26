@@ -6,7 +6,7 @@ import { store } from '../store'
 <template>
     <nav aria-label="Main" role="navigation">
         <ul role="menu" class="menu-list">
-            <li key="0" class="menu-item" role="menuitem" @click="store.changeActiveTab(0)">Work</li>
+            <li key="0" class="menu-item" role="menuitem" @click="store.changeActiveTab(0)">Projects</li>
             <li key="1" class="menu-item" role="menuitem" @click="store.changeActiveTab(2)">About</li>
         </ul>
     </nav>
@@ -23,6 +23,7 @@ nav {
     margin:0;
     text-align: center;
     li{
+        font-size: 18px;
         display: inline-block;
         min-width: 120px;
         border-left: 2px solid white;
