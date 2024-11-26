@@ -42,19 +42,22 @@
             }
         }
     ]
-    function  onEnter(el, done) {
-    anime({
-    targets: 'el',
-  opacity: [0, 1],
-                translateY: [300, 0],
-  easing: 'easeOutElastic',
-  delay: el.dataset.index * 100,
-  direction: 'alternate',
-  loop: true,
-  complete: done
-})
-}
-function  onLeave(el, done) {
+    function  onEnter(el:any, done:()=>void) {
+        if (el!==undefined && el.dataset!==undefined && el.dataset.index!==undefined) {
+
+            anime({
+            targets: 'el',
+          opacity: [0, 1],
+                        translateY: [300, 0],
+          easing: 'easeOutElastic',
+          delay: el.dataset.index ? Number(el.dataset.index) * 100: 100,
+          direction: 'alternate',
+          loop: true,
+          complete: done
+        })
+        }
+        }
+function  onLeave(el:any, done:()=>void) {
     anime({
     targets: 'el',
     opacity: [1, 0],
@@ -63,7 +66,7 @@ function  onLeave(el, done) {
   easing: 'easeOutElastic',
   direction: 'alternate',
   loop: true,
-  delay: (5 - el.dataset.index) * 50,
+  delay: el.dataset.index ? (5 - Number(el.dataset.index)) * 50 : 50,
   complete: done
 })
 }

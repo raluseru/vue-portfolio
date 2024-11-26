@@ -7,7 +7,7 @@ defineProps({
   viewBox: String
 })
 
-const computedBasePath = ref(null)
+const computedBasePath = ref()
 
 const getSvgFile = async (): Promise<string> => {
   try {
