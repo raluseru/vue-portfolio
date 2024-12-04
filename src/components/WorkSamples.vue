@@ -5,7 +5,7 @@
             id:"arhitext",
             link: "https://arhitext.com/",
             img: {
-                src: "/src/assets/logo arhitext.png",
+                src: "/src/assets/logoarhitext.png",
                 alt: "Logo Arhitext"
             }
         },
@@ -21,7 +21,7 @@
             id:"ortodoxia",
             link: "https://ortodoxiacatholica.com/",
             img: {
-                src: "/src/assets/logo-ortodoxia.png",
+                src: "/src/assets/logoortodoxia.png",
                 alt: "Logo Ortodoxia Catholica"
             }
         },
@@ -29,7 +29,7 @@
             id:"orthodox-church",
             link: "https://orthodoxchurchliverpool.co.uk/",
             img: {
-                src: "/src/assets/logo-orthodox-church.png",
+                src: "/src/assets/logoorthodoxchurch.png",
                 alt: "Logo Ortodox Church Liverpool"
             }
         },
@@ -75,7 +75,7 @@ function  onLeave(el:any, done:()=>void) {
 <template>
     <ul class="portfolio-list">
         <transition-group :css="false" @enter="onEnter" @leave="onLeave">
-            <li v-for="(work,i) in workArray" :key="i" :data-index="workArray.length - 1">
+            <li v-for="(work,i) in workArray" :key="i" :data-index="i">
                 <a :href="work.link" >
                     <img :src="work.img.src" class="work-image" :alt="work.img.alt" :class="{'vertical-align': work.id==='ortodoxia'}">
                 </a>

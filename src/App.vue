@@ -8,15 +8,13 @@ import { store } from './store'
 </script>
 
 <template>
-  <div class="bg-style">
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 400"><path d="M12.55604362487793,9.865460395812988C12.55604362487793,9.865460395812988,788.3407592773438,8.071739196777344,788.3407592773438,8.071739196777344C788.3407592773438,8.071739196777344,789.2376098632812,388.3407897949219,789.2376098632812,388.3407897949219C789.2376098632812,388.3407897949219,8.968599319458008,384.7533264160156,8.968599319458008,384.7533264160156C8.968599319458008,384.7533264160156,11.65918254852295,9.865460395812988,11.65918254852295,9.865460395812988" fill="none" stroke-width="1" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)" stroke-linecap="round" stroke-dasharray="0 2"></path><defs><linearGradient id="SvgjsLinearGradient1000"><stop stop-color="hsl(37, 99%, 67%)" offset="0"></stop><stop stop-color="hsl(316, 73%, 52%)" offset="1"></stop></linearGradient></defs></svg>
-  </div>
+  
  <div class="top-nav"> 
     <!-- <Icon icon-id="palette" viewBox="0 0 100 100"></Icon> -->
   </div>
 
   <header role="banner">
-    <img src="/src/assets/logo-raluca.png" class="logo" alt="Logo Raluca">
+    <img src="/src/assets/logoraluca.png" class="logo" alt="Logo Raluca">
   </header>
   <nav-menu></nav-menu>
   <main role="main">
@@ -24,6 +22,9 @@ import { store } from './store'
     <UrbanDesign v-if="store.activeTabIndex===1"/>
     <About v-if="store.activeTabIndex===2"></About>
   </main>
+  <div class="bg-style">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" viewBox="0 0 800 400"><path d="M12.55604362487793,9.865460395812988C12.55604362487793,9.865460395812988,788.3407592773438,8.071739196777344,788.3407592773438,8.071739196777344C788.3407592773438,8.071739196777344,789.2376098632812,388.3407897949219,789.2376098632812,388.3407897949219C789.2376098632812,388.3407897949219,8.968599319458008,384.7533264160156,8.968599319458008,384.7533264160156C8.968599319458008,384.7533264160156,11.65918254852295,9.865460395812988,11.65918254852295,9.865460395812988" fill="none" stroke-width="1" stroke="url(&quot;#SvgjsLinearGradient1000&quot;)" stroke-linecap="round" stroke-dasharray="0 2"></path><defs><linearGradient id="SvgjsLinearGradient1000"><stop stop-color="hsl(37, 99%, 67%)" offset="0"></stop><stop stop-color="hsl(316, 73%, 52%)" offset="1"></stop></linearGradient></defs></svg>
+  </div>
   <footer role="contentinfo">
   <p>&copy; 2024 Design & Code Raluca-Mihaela Serdaru</p>
 </footer>
@@ -38,6 +39,7 @@ import { store } from './store'
   bottom: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 header{
   max-height: 60px;
