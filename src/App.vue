@@ -8,53 +8,109 @@ import { store } from './store'
 </script>
 
 <template>
-    <div class="top-nav">
-        <!-- <Icon icon-id="palette" viewBox="0 0 100 100"></Icon> -->
+    <div class="wrapper">
+        <div class="left-wrapper floating-elements">
+            <div class="rectangle first-rectangle">
+                <p>PORTFOLIO</p>
+            </div>
+            <div class="rectangle second-rectangle"></div>
+        </div>
+        <div class="right-wrapper">
+            <div class="top-nav">
+                <!-- <Icon icon-id="palette" viewBox="0 0 100 100"></Icon> -->
+            </div>
+
+            <header role="banner">
+                <img src="/src/assets/logoraluca.png" class="logo" alt="Logo Raluca" />
+            </header>
+            <nav-menu></nav-menu>
+            <main role="main">
+                <WorkSamples v-if="store.activeTabIndex === 0" />
+                <UrbanDesign v-if="store.activeTabIndex === 1" />
+                <About v-if="store.activeTabIndex === 2"></About>
+            </main>
+        </div>
     </div>
 
-    <header role="banner">
-        <img src="/src/assets/logoraluca.png" class="logo" alt="Logo Raluca" />
-    </header>
-    <nav-menu></nav-menu>
-    <main role="main">
-        <WorkSamples v-if="store.activeTabIndex === 0" />
-        <UrbanDesign v-if="store.activeTabIndex === 1" />
-        <About v-if="store.activeTabIndex === 2"></About>
-    </main>
-    <div class="bg-style">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            version="1.1"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            xmlns:svgjs="http://svgjs.dev/svgjs"
-            viewBox="0 0 800 400"
-        >
-            <path
-                d="M12.55604362487793,9.865460395812988C12.55604362487793,9.865460395812988,788.3407592773438,8.071739196777344,788.3407592773438,8.071739196777344C788.3407592773438,8.071739196777344,789.2376098632812,388.3407897949219,789.2376098632812,388.3407897949219C789.2376098632812,388.3407897949219,8.968599319458008,384.7533264160156,8.968599319458008,384.7533264160156C8.968599319458008,384.7533264160156,11.65918254852295,9.865460395812988,11.65918254852295,9.865460395812988"
-                fill="none"
-                stroke-width="1"
-                stroke='url("#SvgjsLinearGradient1000")'
-                stroke-linecap="round"
-                stroke-dasharray="0 2"
-            ></path>
-            <defs>
-                <linearGradient id="SvgjsLinearGradient1000">
-                    <stop stop-color="hsl(37, 99%, 67%)" offset="0"></stop>
-                    <stop stop-color="hsl(316, 73%, 52%)" offset="1"></stop>
-                </linearGradient>
-            </defs>
-        </svg>
-    </div>
     <footer role="contentinfo">
+        <div class="social-wrapper">
+            <a href="https://wa.me/447586485912">
+                <Icon icon-id="whatsapp" view-box="0 0 16 16"></Icon>
+            </a>
+            <a href="https://github.com/raluseru">
+                <Icon icon-id="github" view-box="0 0 16 16"></Icon>
+            </a>
+        </div>
+
         <p>&copy; 2024 Design & Code Raluca-Mihaela Serdaru</p>
     </footer>
 </template>
 
 <style scoped>
+main {
+    min-height: 375px;
+    p {
+        max-width: 500px;
+    }
+}
+.wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.floating-elements {
+    /* position: absolute;
+    bottom: 10%;
+    z-index: -1; */
+    position: relative;
+}
+.rectangle {
+    width: 160px;
+    height: 160px;
+}
+.first-rectangle {
+    background-color: #4ecac2;
+    p {
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        padding-left: 20px;
+    }
+}
+.second-rectangle {
+    background: 2px 2px/10px 10px transparent radial-gradient(#d7e0ea 18.75%, transparent 0);
+    position: absolute;
+    top: 30%;
+    left: 20%;
+}
 .bg-style {
     display: none;
 }
 @media only screen and (min-width: 768px) {
+    .left-wrapper {
+        flex-basis: 440px;
+        display: flex;
+        align-items: center;
+        p {
+            font-size: 21px;
+        }
+    }
+    .right-wrapper {
+        flex-basis: 700px;
+        min-width: 700px;
+    }
+    .wrapper {
+        flex-direction: row;
+        min-width: 720px;
+        margin: 0 auto;
+        justify-content: center;
+    }
+    .rectangle {
+        width: 220px;
+        height: 220px;
+    }
     .bg-style {
         display: block;
         position: absolute;
@@ -66,14 +122,19 @@ import { store } from './store'
         height: 100%;
         z-index: -1;
     }
-    .logo {
-        border: 2px dotted #a1e44d;
+    .second-rectangle {
+        margin-top: 25%;
+    }
+    main {
+        p {
+            max-width: 500px;
+        }
     }
 }
 
 header {
     max-height: 60px;
-    position: fixed;
+    /* position: fixed; */
     z-index: 9;
     top: 6px;
     left: 0;
@@ -97,6 +158,24 @@ header {
 footer {
     p {
         text-align: center;
+    }
+}
+.social-wrapper {
+    text-align: center;
+    margin: 0 auto;
+    svg {
+        width: 32px;
+        height: 32px;
+    }
+    a {
+        &:hover {
+            svg {
+                fill: #b24c63;
+            }
+        }
+        &:focus {
+            outline: 2px solid #b24c63;
+        }
     }
 }
 </style>

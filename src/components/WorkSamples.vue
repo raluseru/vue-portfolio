@@ -42,6 +42,14 @@ const workArray = [
             alt: 'Logo Becoming Orthodox Christian',
         },
     },
+    {
+        id: 'reper',
+        link: 'https://rper.ro',
+        img: {
+            src: '/src/assets/logo-reper.png',
+            alt: 'Logo Rper',
+        },
+    },
 ]
 
 function onEnter(el: any, done: () => void) {
@@ -79,7 +87,7 @@ onMounted(() => {
         showWorks.value = true
     }, 500)
 })
-const constrainedHeights = ['orthodox-church', 'become-orthodox']
+const constrainedHeights = ['orthodox-church', 'become-orthodox', 'reper']
 </script>
 
 <template>
