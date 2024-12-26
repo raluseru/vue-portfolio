@@ -9,6 +9,10 @@ const workArray = [
             src: '/src/assets/logoarhitext.png',
             alt: 'Logo Arhitext',
         },
+        imgPreview: {
+            src: '/src/assets/previewArhitext.png',
+            alt: 'Preview Arhitext',
+        },
     },
     {
         id: 'cda',
@@ -16,6 +20,10 @@ const workArray = [
         img: {
             src: '/src/assets/cda.png',
             alt: 'Logo CDA Rezindetial',
+        },
+        imgPreview: {
+            src: '/src/assets/cdaPreview.jpg',
+            alt: 'Preview Cda',
         },
     },
     {
@@ -25,6 +33,10 @@ const workArray = [
             src: '/src/assets/logoortodoxia.png',
             alt: 'Logo Ortodoxia Catholica',
         },
+        imgPreview: {
+            src: '/src/assets/previewOrtodoxia.png',
+            alt: 'Preview Ortodoxia',
+        },
     },
     {
         id: 'orthodox-church',
@@ -32,6 +44,10 @@ const workArray = [
         img: {
             src: '/src/assets/logoorthodoxchurch.png',
             alt: 'Logo Ortodox Church Liverpool',
+        },
+        imgPreview: {
+            src: '/src/assets/previewOrthodox.png',
+            alt: 'Preview Church',
         },
     },
     {
@@ -41,6 +57,10 @@ const workArray = [
             src: '/src/assets/becomeorthodox.png',
             alt: 'Logo Becoming Orthodox Christian',
         },
+        imgPreview: {
+            src: '/src/assets/previewBecoming.png',
+            alt: 'Preview Becoming',
+        },
     },
     {
         id: 'reper',
@@ -48,6 +68,10 @@ const workArray = [
         img: {
             src: '/src/assets/logo-reper.png',
             alt: 'Logo Rper',
+        },
+        imgPreview: {
+            src: '/src/assets/previewRper.png',
+            alt: 'Preview Rper',
         },
     },
 ]
@@ -88,6 +112,7 @@ onMounted(() => {
     }, 500)
 })
 const constrainedHeights = ['orthodox-church', 'become-orthodox', 'reper']
+const smallHeights = ['cda']
 </script>
 
 <template>
@@ -101,15 +126,16 @@ const constrainedHeights = ['orthodox-church', 'become-orthodox', 'reper']
         <li v-for="(work, i) in computedList" :key="i" :data-index="i" ref="work">
             <a
                 :href="work.link"
-                :class="{ 'constrain-height': constrainedHeights.includes(work.id) }"
+                :class="{
+                    'constrain-height': constrainedHeights.includes(work.id),
+                    'small-heights': smallHeights.includes(work.id),
+                }"
                 target="_blank"
             >
-                <img
-                    :src="work.img.src"
-                    class="work-image"
-                    :alt="work.img.alt"
-                    :class="{ 'vertical-align': work.id === 'ortodoxia' }"
-                />
+                <img :src="work.img.src" class="work-image" :alt="work.img.alt" />
+            </a>
+            <a :href="work.link" target="_blank">
+                <img :src="work.imgPreview.src" class="work-image" :alt="work.imgPreview.alt" />
             </a>
         </li>
     </transition-group>
@@ -120,26 +146,34 @@ ul.portfolio-list {
     margin: 0;
     list-style-type: none;
     li {
-        width: 220px;
-        border-left: 2px solid white;
-        border-right: 2px solid white;
-        cursor: pointer;
-        text-align: center;
+        display: flex;
+        justify-content: center;
         padding: 0 5px;
-        margin: 0 auto;
+
         min-height: 65px;
-        vertical-align: middle;
-        transition: border ease-in 0.2s;
+
+        a {
+            width: 220px;
+            display: inline-flex;
+            align-self: center;
+            margin: 0 auto;
+        }
         a.constrain-height {
-            display: inline-block;
-            height: 75px;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            height: 67px;
         }
-        &:hover {
-            border-color: #b24c63;
+        a.small-heights {
+            height: 55px;
         }
+
         img {
             max-width: 100%;
             height: 100%;
+        }
+        &:nth-child(odd) {
+            flex-direction: row-reverse;
         }
     }
 }

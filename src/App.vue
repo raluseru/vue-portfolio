@@ -5,25 +5,77 @@ import WorkSamples from './components/WorkSamples.vue'
 import UrbanDesign from './components/UrbanDesign.vue'
 import About from './components/About.vue'
 import { store } from './store'
+import anime from 'animejs/lib/anime.es.js'
+import { onMounted, ref } from 'vue'
+const bgElement = ref(null)
+const bgElement2 = ref(null)
+function startMotion() {
+    const el = bgElement.value
+    anime({
+        targets: el,
+        translateX: function () {
+            return anime.random(0, 470)
+        },
+        easing: 'easeInOutQuad',
+        duration: 5750,
+        complete: startMotion,
+    })
+}
+function startMotion2() {
+    const el = bgElement2.value
+    anime({
+        targets: el,
+        translateX: function () {
+            return anime.random(0, 170)
+        },
+        easing: 'easeInOutQuad',
+        duration: 8750,
+        complete: startMotion2,
+    })
+}
+
+onMounted(() => {
+    console.log('window matchmedia mounted', window.matchMedia('(prefers-color-scheme: dark)'))
+    const isColorSchemeMediaDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    if (isColorSchemeMediaDark) store.changeTheme(isColorSchemeMediaDark)
+    setTimeout(() => {
+        startMotion()
+        startMotion2()
+    }, 500)
+})
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+    console.log('window matchmedia', window.matchMedia('(prefers-color-scheme: dark)'))
+    store.changeTheme(event.matches)
+})
 </script>
 
 <template>
-    <div class="wrapper">
-        <div class="left-wrapper floating-elements">
-            <div class="rectangle first-rectangle">
-                <p>PORTFOLIO</p>
-            </div>
-            <div class="rectangle second-rectangle"></div>
-        </div>
-        <div class="right-wrapper">
-            <div class="top-nav">
-                <!-- <Icon icon-id="palette" viewBox="0 0 100 100"></Icon> -->
-            </div>
-
-            <header role="banner">
-                <img src="/src/assets/logoraluca.png" class="logo" alt="Logo Raluca" />
+    <div class="wrapper relative">
+        <div class="top-nav fixed justify-between left-0 top-0 flex w-full p-8">
+            <header role="banner" class="flex">
+                <a
+                    href="https://raluseru.com/"
+                    class="logo text-2xl text-slate-900 dark:text-white"
+                >
+                    <span>R</span>
+                    <span class="text-slate-300">/</span>
+                    <span>S</span></a
+                >
             </header>
             <nav-menu></nav-menu>
+        </div>
+        <div
+            class="fixed bg-element size-60 rounded-full bg-gradient-to-r from-indigo-500"
+            ref="bgElement"
+        ></div>
+        <div class="left-wrapper floating-elements">
+            <!-- <div class="rectangle first-rectangle">
+                <p>PORTFOLIO</p>
+            </div> -->
+            <div class="fixed rectangle second-rectangle rounded-full" ref="bgElement2"></div>
+        </div>
+        <div class="right-wrapper">
             <main role="main">
                 <WorkSamples v-if="store.activeTabIndex === 0" />
                 <UrbanDesign v-if="store.activeTabIndex === 1" />
@@ -42,12 +94,15 @@ import { store } from './store'
             </a>
         </div>
 
-        <p>&copy; 2024 Design & Code Raluca-Mihaela Serdaru</p>
+        <p class="text-slate-900 dark:text-white">
+            &copy; 2024 Design & Code Raluca-Mihaela Serdaru
+        </p>
     </footer>
 </template>
 
 <style scoped>
 main {
+    padding-top: 100px;
     min-height: 375px;
     p {
         max-width: 500px;
@@ -148,11 +203,28 @@ header {
 }
 .logo {
     display: block;
-    height: 100%;
-    width: 160px;
-    object-fit: contain;
-    margin: 0 auto;
-    margin: 0 auto;
+    padding: 5px;
+    min-width: 60px;
+    min-height: 30px;
+    span {
+        margin-right: 7px;
+        transition: all 0.3s;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
+    &:hover {
+        .text-slate-300 {
+            visibility: hidden;
+            opacity: 0;
+            margin-right: 0;
+        }
+        span:last-of-type {
+            transform: translateX(-100%);
+            display: inline-block;
+        }
+    }
 }
 
 footer {
