@@ -25,28 +25,29 @@ body {
 }
 @media (prefers-color-scheme: dark) {
   body {
-    background-image: linear-gradient(114deg, rgba(0, 0, 0, 0.9) 27%, rgba(0, 0, 0, 0) 50%),
+    background-image: linear-gradient(114deg, rgba(0, 0, 0, 0.9) 27%, rgb(23 25 26 / 59%) 50%),
       linear-gradient(114deg, rgba(93, 105, 103, 0.49) 0%, rgb(22, 87, 100) 66%),
-      linear-gradient(114deg, rgba(175, 228, 226, 0.15) 0%, rgba(6, 33, 38, 0.83) 97%);
+      linear-gradient(114deg, rgb(56 80 79 / 51%) 0%, rgb(6 33 38 / 95%) 97%);
   }
 }
 @media (prefers-color-scheme: light) {
   body {
     background-image: linear-gradient(
         114deg,
-        rgba(237, 237, 237, 0.07) 27%,
-        rgba(179, 183, 183, 0) 50%
+        rgb(217 224 229 / 44%) 27%,
+        rgb(238 241 241 / 76%) 50%
       ),
-      linear-gradient(114deg, rgba(93, 105, 103, 0.49) 0%, rgba(6, 187, 224, 0.43) 66%),
-      linear-gradient(114deg, rgba(175, 228, 226, 0.15) 0%, rgba(6, 187, 224, 0.53) 97%);
+      linear-gradient(114deg, rgb(220 233 231 / 49%) 0%, rgba(6, 187, 224, 0.43) 66%),
+      linear-gradient(114deg, rgb(251 255 255) 0%, rgb(231 231 231 / 15%) 97%);
   }
 }
 body.light {
-  background-image: linear-gradient(
-      114deg,
-      rgba(237, 237, 237, 0.07) 27%,
-      rgba(179, 183, 183, 0) 50%
-    ),
-    linear-gradient(114deg, rgba(93, 105, 103, 0.49) 0%, rgba(6, 187, 224, 0.43) 66%),
-    linear-gradient(114deg, rgba(175, 228, 226, 0.15) 0%, rgba(6, 187, 224, 0.53) 97%);
+  background-image: linear-gradient(114deg, rgb(217 224 229 / 44%) 27%, rgb(238 241 241 / 76%) 50%),
+    linear-gradient(114deg, rgb(220 233 231 / 49%) 0%, rgba(6, 187, 224, 0.43) 66%),
+    linear-gradient(114deg, rgb(251 255 255) 0%, rgb(231 231 231 / 15%) 97%);
+  .preview-link {
+    &:after {
+      background: theme('colors.scooter.50');
+    }
+  }
 }

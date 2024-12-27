@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Rellax from 'rellax'
 import NavMenu from './components/NavMenu.vue'
 import Icon from './components/Icon.vue'
 import WorkSamples from './components/WorkSamples.vue'
@@ -42,6 +43,7 @@ onMounted(() => {
         startMotion()
         startMotion2()
     }, 500)
+    const rellax = new Rellax('.rellax')
 })
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
@@ -66,7 +68,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev
             <nav-menu></nav-menu>
         </div>
         <div
-            class="fixed bg-element size-60 rounded-full bg-gradient-to-r from-indigo-500"
+            class="fixed bg-element size-60 rounded-full blur-sm bg-gradient-to-r from-scooter-100 dark:from-casal-800"
             ref="bgElement"
         ></div>
         <div class="left-wrapper floating-elements">
@@ -75,7 +77,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev
             </div> -->
             <div class="fixed rectangle second-rectangle rounded-full" ref="bgElement2"></div>
         </div>
-        <div class="right-wrapper">
+        <div class="right-wrapper rellax">
             <main role="main">
                 <WorkSamples v-if="store.activeTabIndex === 0" />
                 <UrbanDesign v-if="store.activeTabIndex === 1" />

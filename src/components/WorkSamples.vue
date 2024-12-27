@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import anime from 'animejs/lib/anime.es.js'
 import { computed, onMounted, ref } from 'vue'
+import { store } from '../store'
 const workArray = [
     {
         id: 'arhitext',
@@ -8,6 +9,10 @@ const workArray = [
         img: {
             src: '/src/assets/logoarhitext.png',
             alt: 'Logo Arhitext',
+        },
+        imgDark: {
+            src: '/src/assets/arhitextwhite.png',
+            alt: 'Logo Arhitext white',
         },
         imgPreview: {
             src: '/src/assets/previewArhitext.png',
@@ -21,6 +26,10 @@ const workArray = [
             src: '/src/assets/cda.png',
             alt: 'Logo CDA Rezindetial',
         },
+        imgDark: {
+            src: '/src/assets/cdawhite.png',
+            alt: 'Logo Cda white',
+        },
         imgPreview: {
             src: '/src/assets/cdaPreview.jpg',
             alt: 'Preview Cda',
@@ -33,6 +42,10 @@ const workArray = [
             src: '/src/assets/logoortodoxia.png',
             alt: 'Logo Ortodoxia Catholica',
         },
+        imgDark: {
+            src: '/src/assets/ortodoxiawhite.png',
+            alt: 'Logo ortodoxia white',
+        },
         imgPreview: {
             src: '/src/assets/previewOrtodoxia.png',
             alt: 'Preview Ortodoxia',
@@ -42,6 +55,10 @@ const workArray = [
         id: 'orthodox-church',
         link: 'https://orthodoxchurchliverpool.co.uk/',
         img: {
+            src: '/src/assets/logoorthodoxchurch.png',
+            alt: 'Logo Ortodox Church Liverpool',
+        },
+        imgDark: {
             src: '/src/assets/logoorthodoxchurch.png',
             alt: 'Logo Ortodox Church Liverpool',
         },
@@ -57,6 +74,10 @@ const workArray = [
             src: '/src/assets/becomeorthodox.png',
             alt: 'Logo Becoming Orthodox Christian',
         },
+        imgDark: {
+            src: '/src/assets/becomeorthodoxwhite.png',
+            alt: 'Logo Becoming Orthodox Christian',
+        },
         imgPreview: {
             src: '/src/assets/previewBecoming.png',
             alt: 'Preview Becoming',
@@ -66,6 +87,10 @@ const workArray = [
         id: 'reper',
         link: 'https://rper.ro',
         img: {
+            src: '/src/assets/logo-reper.png',
+            alt: 'Logo Rper',
+        },
+        imgDark: {
             src: '/src/assets/logo-reper.png',
             alt: 'Logo Rper',
         },
@@ -132,15 +157,55 @@ const smallHeights = ['cda']
                 }"
                 target="_blank"
             >
-                <img :src="work.img.src" class="work-image" :alt="work.img.alt" />
+                <img
+                    v-if="store.isDark"
+                    :src="work.imgDark.src"
+                    class="work-image"
+                    :alt="work.imgDark.alt"
+                />
+                <img v-else :src="work.img.src" class="work-image" :alt="work.img.alt" />
             </a>
-            <a :href="work.link" target="_blank">
+            <a
+                :href="work.link"
+                target="_blank"
+                class="preview-link bg-scooter-50 dark:bg-casal-950"
+            >
                 <img :src="work.imgPreview.src" class="work-image" :alt="work.imgPreview.alt" />
             </a>
         </li>
     </transition-group>
 </template>
 <style lang="scss">
+.preview-link {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateX(0);
+        visibility: hidden;
+        transition: all 0.5s;
+        display: block;
+        background: theme('colors.casal.950');
+        z-index: -1;
+    }
+    &:hover {
+        &:after {
+            visibility: visible;
+            transform: translateX(-100%);
+        }
+    }
+}
+@media (prefers-color-scheme: light) {
+    .preview-link {
+        &:after {
+            background: theme('colors.scooter.50');
+        }
+    }
+}
 ul.portfolio-list {
     padding: 0;
     margin: 0;
@@ -148,24 +213,25 @@ ul.portfolio-list {
     li {
         display: flex;
         justify-content: center;
-        padding: 0 5px;
-
         min-height: 65px;
 
         a {
-            width: 220px;
+            width: 300px;
             display: inline-flex;
             align-self: center;
-            margin: 0 auto;
+            padding: 10px;
         }
         a.constrain-height {
             align-content: center;
             align-items: center;
             justify-content: center;
-            height: 67px;
+            height: 110px;
         }
         a.small-heights {
-            height: 55px;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
         }
 
         img {
@@ -174,6 +240,13 @@ ul.portfolio-list {
         }
         &:nth-child(odd) {
             flex-direction: row-reverse;
+            .preview-link {
+                &:hover {
+                    &:after {
+                        transform: translateX(100%);
+                    }
+                }
+            }
         }
     }
 }
