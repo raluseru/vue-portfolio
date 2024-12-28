@@ -72,9 +72,12 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev
             ref="bgElement"
         ></div>
         <div class="left-wrapper floating-elements">
-            <!-- <div class="rectangle first-rectangle">
-                <p>PORTFOLIO</p>
-            </div> -->
+            <div class="relative md:fixed pt-16 md:pt-0 top-1/2 md:left-8">
+                <h1 v-if="store.activeTabIndex === 0" class="text-dark dark:text-white text-6xl">
+                    PORTFOLIO
+                </h1>
+                <h1 v-else class="text-dark dark:text-white text-6xl">About</h1>
+            </div>
             <div class="fixed rectangle second-rectangle rounded-full" ref="bgElement2"></div>
         </div>
         <div class="right-wrapper rellax">
@@ -104,7 +107,7 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev
 
 <style scoped>
 main {
-    padding-top: 100px;
+    margin-top: 100px;
     min-height: 375px;
     p {
         max-width: 500px;
@@ -112,7 +115,7 @@ main {
 }
 .wrapper {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .floating-elements {
@@ -144,6 +147,9 @@ main {
 }
 .bg-style {
     display: none;
+}
+h1 {
+    font-family: 'Newsreader', serif;
 }
 @media only screen and (min-width: 768px) {
     .left-wrapper {
@@ -199,6 +205,7 @@ header {
 }
 .top-nav {
     max-height: 60px;
+    z-index: 99;
     svg {
         height: 100%;
     }

@@ -170,7 +170,13 @@ const smallHeights = ['cda']
                 target="_blank"
                 class="preview-link bg-scooter-50 dark:bg-casal-950"
             >
-                <img :src="work.imgPreview.src" class="work-image" :alt="work.imgPreview.alt" />
+                <img
+                    :src="work.imgPreview.src"
+                    class="work-image"
+                    :alt="work.imgPreview.alt"
+                    width="1887"
+                    height="878"
+                />
             </a>
         </li>
     </transition-group>
@@ -186,7 +192,6 @@ const smallHeights = ['cda']
         width: 100%;
         height: 100%;
         transform: translateX(0);
-        visibility: hidden;
         transition: all 0.5s;
         display: block;
         background: theme('colors.casal.950');
@@ -194,7 +199,6 @@ const smallHeights = ['cda']
     }
     &:hover {
         &:after {
-            visibility: visible;
             transform: translateX(-100%);
         }
     }

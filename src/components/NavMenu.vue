@@ -25,7 +25,7 @@ import { store } from '../store'
             </li>
             <li>
                 <button
-                    class="size-6 rounded-full absolute bg-black dark:bg-white"
+                    class="theme-changer size-6 rounded-full absolute bg-black dark:bg-white"
                     aria-label="Change theme"
                     @click="store.changeTheme(!store.isDark)"
                 ></button>
@@ -38,7 +38,9 @@ nav {
     font-weight: 300;
     font-style: normal;
 }
-
+.theme-changer {
+    top: -16px;
+}
 .menu-list {
     padding: 0;
     margin: 0;
@@ -47,7 +49,7 @@ nav {
         font-size: 18px;
         position: relative;
         display: inline-block;
-        min-width: 60px;
+        min-width: 75px;
         cursor: pointer;
         text-align: center;
         padding: 0 5px;
