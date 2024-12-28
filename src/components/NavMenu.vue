@@ -7,7 +7,7 @@ import { store } from '../store'
         <ul role="menu" class="menu-list">
             <li
                 key="0"
-                class="menu-item"
+                class="menu-item text-slate-900 dark:text-white"
                 role="menuitem"
                 :class="{ active: store.activeTabIndex === 0 }"
                 @click="store.changeActiveTab(0)"
@@ -16,22 +16,30 @@ import { store } from '../store'
             </li>
             <li
                 key="1"
-                class="menu-item"
+                class="menu-item text-slate-900 dark:text-white"
                 role="menuitem"
                 :class="{ active: store.activeTabIndex === 2 }"
                 @click="store.changeActiveTab(2)"
             >
                 About
             </li>
+            <li>
+                <button
+                    class="theme-changer size-6 rounded-full absolute bg-black dark:bg-white"
+                    aria-label="Change theme"
+                    @click="store.changeTheme(!store.isDark)"
+                ></button>
+            </li>
         </ul>
     </nav>
 </template>
 <style lang="scss">
 nav {
-    padding: 30px 0;
     font-weight: 300;
     font-style: normal;
-    margin-top: 30px;
+}
+.theme-changer {
+    top: -16px;
 }
 .menu-list {
     padding: 0;
@@ -39,20 +47,48 @@ nav {
     text-align: center;
     li {
         font-size: 18px;
+        position: relative;
         display: inline-block;
-        min-width: 120px;
-        border-left: 2px solid white;
-        border-right: 2px solid white;
+        min-width: 75px;
         cursor: pointer;
         text-align: center;
         padding: 0 5px;
         transition: border ease-in 0.2s;
 
-        &:hover {
-            border-color: #36827f;
+        &:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            background-color: #36827f;
+            top: 100%;
+            left: 0;
+            transition: all 0.2s ease-in-out;
         }
-        &.active {
-            border-color: #b24c63;
+        &:hover:after,
+        &.active:after {
+            width: 100%;
+        }
+        &:last-of-type {
+            display: inline-flex;
+            justify-content: flex-end;
+            min-width: 60px;
+            align-items: center;
+            &:after,
+            &:hover:after,
+            &.active:after {
+                display: none;
+            }
+            & > div {
+                top: -16px;
+            }
+        }
+    }
+}
+@media only screen and (min-width: 768px) {
+    .menu-list {
+        li {
+            min-width: 120px;
         }
     }
 }

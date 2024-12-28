@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import anime from 'animejs/lib/anime.es.js'
 import { computed, onMounted, ref } from 'vue'
+import { store } from '../store'
 const workArray = [
     {
         id: 'arhitext',
@@ -8,6 +9,14 @@ const workArray = [
         img: {
             src: '/src/assets/logoarhitext.png',
             alt: 'Logo Arhitext',
+        },
+        imgDark: {
+            src: '/src/assets/arhitextwhite.png',
+            alt: 'Logo Arhitext white',
+        },
+        imgPreview: {
+            src: '/src/assets/previewArhitext.png',
+            alt: 'Preview Arhitext',
         },
     },
     {
@@ -17,6 +26,14 @@ const workArray = [
             src: '/src/assets/cda.png',
             alt: 'Logo CDA Rezindetial',
         },
+        imgDark: {
+            src: '/src/assets/cdawhite.png',
+            alt: 'Logo Cda white',
+        },
+        imgPreview: {
+            src: '/src/assets/cdaPreview.jpg',
+            alt: 'Preview Cda',
+        },
     },
     {
         id: 'ortodoxia',
@@ -24,6 +41,14 @@ const workArray = [
         img: {
             src: '/src/assets/logoortodoxia.png',
             alt: 'Logo Ortodoxia Catholica',
+        },
+        imgDark: {
+            src: '/src/assets/ortodoxiawhite.png',
+            alt: 'Logo ortodoxia white',
+        },
+        imgPreview: {
+            src: '/src/assets/previewOrtodoxia.png',
+            alt: 'Preview Ortodoxia',
         },
     },
     {
@@ -33,6 +58,14 @@ const workArray = [
             src: '/src/assets/logoorthodoxchurch.png',
             alt: 'Logo Ortodox Church Liverpool',
         },
+        imgDark: {
+            src: '/src/assets/logoorthodoxchurch.png',
+            alt: 'Logo Ortodox Church Liverpool',
+        },
+        imgPreview: {
+            src: '/src/assets/previewOrthodox.png',
+            alt: 'Preview Church',
+        },
     },
     {
         id: 'become-orthodox',
@@ -41,6 +74,14 @@ const workArray = [
             src: '/src/assets/becomeorthodox.png',
             alt: 'Logo Becoming Orthodox Christian',
         },
+        imgDark: {
+            src: '/src/assets/becomeorthodoxwhite.png',
+            alt: 'Logo Becoming Orthodox Christian',
+        },
+        imgPreview: {
+            src: '/src/assets/previewBecoming.png',
+            alt: 'Preview Becoming',
+        },
     },
     {
         id: 'reper',
@@ -48,6 +89,14 @@ const workArray = [
         img: {
             src: '/src/assets/logo-reper.png',
             alt: 'Logo Rper',
+        },
+        imgDark: {
+            src: '/src/assets/logo-reper.png',
+            alt: 'Logo Rper',
+        },
+        imgPreview: {
+            src: '/src/assets/previewRper.png',
+            alt: 'Preview Rper',
         },
     },
 ]
@@ -88,6 +137,7 @@ onMounted(() => {
     }, 500)
 })
 const constrainedHeights = ['orthodox-church', 'become-orthodox', 'reper']
+const smallHeights = ['cda']
 </script>
 
 <template>
@@ -101,45 +151,106 @@ const constrainedHeights = ['orthodox-church', 'become-orthodox', 'reper']
         <li v-for="(work, i) in computedList" :key="i" :data-index="i" ref="work">
             <a
                 :href="work.link"
-                :class="{ 'constrain-height': constrainedHeights.includes(work.id) }"
+                :class="{
+                    'constrain-height': constrainedHeights.includes(work.id),
+                    'small-heights': smallHeights.includes(work.id),
+                }"
                 target="_blank"
             >
                 <img
-                    :src="work.img.src"
+                    v-if="store.isDark"
+                    :src="work.imgDark.src"
                     class="work-image"
-                    :alt="work.img.alt"
-                    :class="{ 'vertical-align': work.id === 'ortodoxia' }"
+                    :alt="work.imgDark.alt"
+                />
+                <img v-else :src="work.img.src" class="work-image" :alt="work.img.alt" />
+            </a>
+            <a
+                :href="work.link"
+                target="_blank"
+                class="preview-link bg-scooter-50 dark:bg-casal-950"
+            >
+                <img
+                    :src="work.imgPreview.src"
+                    class="work-image"
+                    :alt="work.imgPreview.alt"
+                    width="1887"
+                    height="878"
                 />
             </a>
         </li>
     </transition-group>
 </template>
 <style lang="scss">
+.preview-link {
+    position: relative;
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateX(0);
+        transition: all 0.5s;
+        display: block;
+        background: theme('colors.casal.950');
+        z-index: -1;
+    }
+    &:hover {
+        &:after {
+            transform: translateX(-100%);
+        }
+    }
+}
+@media (prefers-color-scheme: light) {
+    .preview-link {
+        &:after {
+            background: theme('colors.scooter.50');
+        }
+    }
+}
 ul.portfolio-list {
     padding: 0;
     margin: 0;
     list-style-type: none;
     li {
-        width: 220px;
-        border-left: 2px solid white;
-        border-right: 2px solid white;
-        cursor: pointer;
-        text-align: center;
-        padding: 0 5px;
-        margin: 0 auto;
+        display: flex;
+        justify-content: center;
         min-height: 65px;
-        vertical-align: middle;
-        transition: border ease-in 0.2s;
+
+        a {
+            width: 300px;
+            display: inline-flex;
+            align-self: center;
+            padding: 10px;
+        }
         a.constrain-height {
-            display: inline-block;
-            height: 75px;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            height: 110px;
         }
-        &:hover {
-            border-color: #b24c63;
+        a.small-heights {
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
         }
+
         img {
             max-width: 100%;
             height: 100%;
+        }
+        &:nth-child(odd) {
+            flex-direction: row-reverse;
+            .preview-link {
+                &:hover {
+                    &:after {
+                        transform: translateX(100%);
+                    }
+                }
+            }
         }
     }
 }
