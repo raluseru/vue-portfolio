@@ -31,7 +31,7 @@ const workArray = [
             alt: 'Logo Cda white',
         },
         imgPreview: {
-            src: '/src/assets/longpreviewcda.webp',
+            src: '/src/assets/longpreviewcda.png',
             alt: 'Preview Cda',
         },
     },
