@@ -23,7 +23,7 @@ import { store } from '../store'
             >
                 About
             </li>
-            <li>
+            <li role="menuitem">
                 <button
                     class="theme-changer size-6 rounded-full absolute bg-black dark:bg-white"
                     aria-label="Change theme"

@@ -1,6 +1,15 @@
 <script setup lang="ts"></script>
 
 <template>
+    <!-- <div class="profile-picture">
+        <img
+            src="../assets/image.png"
+            class="me-image"
+            alt="Raluca image"
+            width="512"
+            height="682"
+        />
+    </div> -->
     <p class="text-dark dark:text-white">
         My passion lies in crafting software products with valuable and accessible user experiences.
         This started as a hobby, which became after a while a full-time job. I started to create
@@ -11,11 +20,11 @@
         >.
     </p>
     <p class="text-dark dark:text-white">
-        My Javascript/ TypeScript experience is mostly in Vue.js framework or vanilla TypeScript,
-        but I like to experience other technologies as well. My belief is that coding is mostly
-        about the algorithm you choose and the way you can apply certain programming principles -
-        It's not only about a type of framework. I like to write comprehensive code, which is easy
-        to be understood by others.
+        My Javascript / TypeScript experience is mostly in Vue.js framework or vanilla TypeScript,
+        but I like to experience other technologies as well. It's not only about a type of
+        framework. It's mostly about the algorithm you choose and the way you can apply certain
+        programming principles - I like to write comprehensive code, which is easy to be understood
+        by others.
     </p>
     <p class="text-dark dark:text-white">
         In my spare time I like "to play with pencils". My educational and previous professional
@@ -26,6 +35,7 @@
 <style lang="scss" scoped>
 p {
     font-size: 18px;
+    margin-bottom: 24px;
 }
 a {
     text-decoration: none;
@@ -52,5 +62,10 @@ a {
             background: theme('colors.casal.950');
         }
     }
+}
+.profile-picture {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
 }
 </style>

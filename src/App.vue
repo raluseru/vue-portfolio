@@ -80,12 +80,17 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (ev
             </div>
             <div class="fixed rectangle second-rectangle rounded-full" ref="bgElement2"></div>
         </div>
-        <div class="right-wrapper rellax">
+        <div class="rellax middle-wrapper">
             <main role="main">
                 <WorkSamples v-if="store.activeTabIndex === 0" />
                 <UrbanDesign v-if="store.activeTabIndex === 1" />
                 <About v-if="store.activeTabIndex === 2"></About>
             </main>
+        </div>
+        <div class="right-wrapper relative">
+            <div class="relative md:fixed pt-16 hidden md:pt-0 md:block md:top-1/2 md:right-8">
+                <h1 class="text-dark dark:text-white text-6xl">Raluca</h1>
+            </div>
         </div>
     </div>
 
@@ -116,6 +121,9 @@ main {
 .wrapper {
     display: flex;
     flex-direction: column;
+}
+.middle-wrapper {
+    min-height: 1200px;
 }
 
 .floating-elements {
@@ -153,20 +161,17 @@ h1 {
 }
 @media only screen and (min-width: 768px) {
     .left-wrapper {
-        flex-basis: 440px;
         display: flex;
         align-items: center;
-        p {
-            font-size: 21px;
-        }
     }
     .right-wrapper {
-        flex-basis: 700px;
-        min-width: 700px;
+        display: flex;
+        align-items: center;
     }
     .wrapper {
         flex-direction: row;
         min-width: 720px;
+        max-width: 720px;
         margin: 0 auto;
         justify-content: center;
     }
@@ -244,6 +249,10 @@ footer {
 .social-wrapper {
     text-align: center;
     margin: 0 auto;
+    display: grid;
+    grid-gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
     svg {
         width: 32px;
         height: 32px;
