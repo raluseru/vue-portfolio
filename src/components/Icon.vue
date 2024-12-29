@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import baseBath from '../assets/icons.svg'
+import baseBath from 'https://raluseru.com/src/assets/icons.svg'
 
 defineProps({
     iconId: String,
@@ -9,11 +9,18 @@ defineProps({
 
 const computedBasePath = ref()
 
-const getSvgFile = async (): Promise<string> => {
+const getSvgFile = async (req, res): Promise<string> => {
     try {
         const response = await fetch(baseBath)
         if (!response.ok) throw new Error('Network response was not ok')
-        return baseBath // Return the path to the SVG
+        const svgContent = await response.text()
+        // Set the appropriate headers for the response
+        res.setHeader('Content-Type', 'image/svg+xml')
+        res.setHeader('Cache-Control', 'public, max-age=31536000') // Optional: Add caching headers
+
+        // Send the SVG content back to the client
+        res.send(svgContent)
+        return svgContent // Return the path to the SVG
     } catch (e) {
         console.error(e) // Log the error
         throw 'There was an error getting the file'
