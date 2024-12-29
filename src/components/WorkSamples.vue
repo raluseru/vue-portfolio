@@ -15,7 +15,7 @@ const workArray = [
             alt: 'Logo Arhitext white',
         },
         imgPreview: {
-            src: '/src/assets/longpreviewarhitext.png',
+            src: '/src/assets/longpreviewarhitext.webp',
             alt: 'Preview Arhitext',
         },
     },
@@ -31,7 +31,7 @@ const workArray = [
             alt: 'Logo Cda white',
         },
         imgPreview: {
-            src: '/src/assets/longpreviewcda.png',
+            src: '/src/assets/longpreviewcda.webp',
             alt: 'Preview Cda',
         },
     },
@@ -47,7 +47,7 @@ const workArray = [
             alt: 'Logo ortodoxia white',
         },
         imgPreview: {
-            src: '/src/assets/longpreviewortodoxia.png',
+            src: '/src/assets/longpreviewortodoxia.webp',
             alt: 'Preview Ortodoxia',
         },
     },
@@ -63,7 +63,7 @@ const workArray = [
             alt: 'Logo Ortodox Church Liverpool',
         },
         imgPreview: {
-            src: '/src/assets/longprevieworthodox.png',
+            src: '/src/assets/longprevieworthodox.webp',
             alt: 'Preview Church',
         },
     },
@@ -79,7 +79,7 @@ const workArray = [
             alt: 'Logo Becoming Orthodox Christian',
         },
         imgPreview: {
-            src: '/src/assets/longpreviewbecoming.png',
+            src: '/src/assets/longpreviewbecoming.webp',
             alt: 'Preview Becoming',
         },
     },
@@ -95,7 +95,7 @@ const workArray = [
             alt: 'Logo Rper',
         },
         imgPreview: {
-            src: '/src/assets/longpreviewrper.png',
+            src: '/src/assets/longpreviewrper.webp',
             alt: 'Preview Rper',
         },
     },

@@ -253,6 +253,7 @@ footer {
     grid-gap: 10px;
     justify-content: center;
     margin-bottom: 24px;
+    cursor: pointer;
     svg {
         width: 32px;
         height: 32px;

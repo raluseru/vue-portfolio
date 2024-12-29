@@ -16,10 +16,7 @@ onMounted(async () => {
 
 <template>
     <svg v-if="svgContent">
-        <use
-            :href="`data:image/svg+xml,${encodeURIComponent(svgContent)}#${iconId}`"
-            :viewBox="viewBox"
-        />
+        <use :href="`${svgContent.url}#${iconId}`" :viewBox="viewBox" />
     </svg>
 </template>
 <style lang="scss">
