@@ -15,7 +15,7 @@ const workArray = [
             alt: 'Logo Arhitext white',
         },
         imgPreview: {
-            src: '/src/assets/previewArhitext.png',
+            src: '/src/assets/longpreviewarhitext.webp',
             alt: 'Preview Arhitext',
         },
     },
@@ -31,7 +31,7 @@ const workArray = [
             alt: 'Logo Cda white',
         },
         imgPreview: {
-            src: '/src/assets/cdaPreview.jpg',
+            src: '/src/assets/longpreviewcda.webp',
             alt: 'Preview Cda',
         },
     },
@@ -47,7 +47,7 @@ const workArray = [
             alt: 'Logo ortodoxia white',
         },
         imgPreview: {
-            src: '/src/assets/previewOrtodoxia.png',
+            src: '/src/assets/longpreviewortodoxia.webp',
             alt: 'Preview Ortodoxia',
         },
     },
@@ -63,7 +63,7 @@ const workArray = [
             alt: 'Logo Ortodox Church Liverpool',
         },
         imgPreview: {
-            src: '/src/assets/previewOrthodox.png',
+            src: '/src/assets/longprevieworthodox.webp',
             alt: 'Preview Church',
         },
     },
@@ -79,7 +79,7 @@ const workArray = [
             alt: 'Logo Becoming Orthodox Christian',
         },
         imgPreview: {
-            src: '/src/assets/previewBecoming.png',
+            src: '/src/assets/longpreviewbecoming.webp',
             alt: 'Preview Becoming',
         },
     },
@@ -95,7 +95,7 @@ const workArray = [
             alt: 'Logo Rper',
         },
         imgPreview: {
-            src: '/src/assets/previewRper.png',
+            src: '/src/assets/longpreviewrper.webp',
             alt: 'Preview Rper',
         },
     },
@@ -138,6 +138,19 @@ onMounted(() => {
 })
 const constrainedHeights = ['orthodox-church', 'become-orthodox', 'reper']
 const smallHeights = ['cda']
+
+function onMouseEnter(el: MouseEvent) {
+    const element = el.target as HTMLElement
+    if (element) {
+        element.classList.add('item-hovered')
+    }
+}
+function onMouseLeave(el: MouseEvent) {
+    const element = el.target as HTMLElement
+    if (element) {
+        if (element.classList.contains('item-hovered')) element.classList.remove('item-hovered')
+    }
+}
 </script>
 
 <template>
@@ -148,9 +161,19 @@ const smallHeights = ['cda']
         @enter="onEnter"
         @leave="onLeave"
     >
-        <li v-for="(work, i) in computedList" :key="i" :data-index="i" ref="work">
+        <li
+            v-for="(work, i) in computedList"
+            :key="i"
+            :data-index="i"
+            ref="work"
+            class="list-element cursor-pointer"
+            :class="{ 'light-mode': !store.isDark }"
+            @mouseenter="onMouseEnter"
+            @mouseleave="onMouseLeave"
+        >
             <a
                 :href="work.link"
+                class="logo-link"
                 :class="{
                     'constrain-height': constrainedHeights.includes(work.id),
                     'small-heights': smallHeights.includes(work.id),
@@ -165,11 +188,7 @@ const smallHeights = ['cda']
                 />
                 <img v-else :src="work.img.src" class="work-image" :alt="work.img.alt" />
             </a>
-            <a
-                :href="work.link"
-                target="_blank"
-                class="preview-link bg-scooter-50 dark:bg-casal-950"
-            >
+            <div class="item-image preview-link bg-scooter-50 dark:bg-casal-950">
                 <img
                     :src="work.imgPreview.src"
                     class="work-image"
@@ -177,39 +196,80 @@ const smallHeights = ['cda']
                     width="1887"
                     height="878"
                 />
-            </a>
+            </div>
         </li>
     </transition-group>
 </template>
 <style lang="scss">
-.preview-link {
+.logo-link {
+    img {
+        max-width: 100%;
+        height: 100%;
+    }
+}
+.item-image {
     position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    align-self: center;
+    padding: 10px;
+    width: 300px;
+    height: 150px;
+    border: 3px solid theme('colors.casal.950');
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        align-self: center;
+        transition: top 5s;
+    }
+}
+.list-element {
+    position: relative;
+    max-width: 600px;
+
     &:after {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
-        width: 100%;
+        width: 50%;
         height: 100%;
-        transform: translateX(0);
+        transform: translateX(100%);
         transition: all 0.5s;
         display: block;
         background: theme('colors.casal.950');
         z-index: -1;
     }
-    &:hover {
+    &:nth-child(odd) {
         &:after {
-            transform: translateX(-100%);
+            transform: translateX(0);
         }
     }
-}
-@media (prefers-color-scheme: light) {
-    .preview-link {
+    &.item-hovered {
+        &:after {
+            transform: translateX(0);
+        }
+
+        &:nth-child(odd) {
+            &:after {
+                transform: translateX(100%);
+            }
+        }
+        .preview-link img {
+            top: -250px;
+        }
+    }
+    &.light-mode {
         &:after {
             background: theme('colors.scooter.50');
         }
+        .item-image {
+            border: 3px solid theme('colors.scooter.50');
+        }
     }
 }
+
 ul.portfolio-list {
     padding: 0;
     margin: 0;
@@ -238,20 +298,20 @@ ul.portfolio-list {
             height: 70px;
         }
 
-        img {
-            max-width: 100%;
-            height: 100%;
-        }
         &:nth-child(odd) {
             flex-direction: row-reverse;
-            .preview-link {
-                &:hover {
-                    &:after {
-                        transform: translateX(100%);
-                    }
-                }
-            }
         }
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .list-element {
+        &:after {
+            background: theme('colors.scooter.50');
+        }
+    }
+    .item-image {
+        border: 3px solid theme('colors.scooter.50');
     }
 }
 </style>
