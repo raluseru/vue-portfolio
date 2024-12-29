@@ -7,7 +7,8 @@ defineProps({
     viewBox: String,
 })
 
-const svgContent = ref<string>('')
+// Type svgContent as an object with a `url` property
+const svgContent = ref<{ url: string } | null>(null)
 
 onMounted(async () => {
     svgContent.value = await getSvgSprite()
@@ -19,6 +20,7 @@ onMounted(async () => {
         <use :href="`${svgContent.url}#${iconId}`" :viewBox="viewBox" />
     </svg>
 </template>
+
 <style lang="scss">
 svg {
     width: 100%;
